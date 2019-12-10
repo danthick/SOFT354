@@ -1,0 +1,5 @@
+﻿  NN-Serial.cpp
+C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(23,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(39,52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(43,52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+  NN-Serial.vcxproj -> C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\x64\Debug\NN-Serial.exe

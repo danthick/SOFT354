@@ -1,2 +1,7 @@
-﻿  NN-Serial.cpp
+﻿  Matrix.cpp
+  NN-Serial.cpp
+C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(37,52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(61,50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(65,51): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
   NN-Serial.vcxproj -> C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\Debug\NN-Serial.exe
