@@ -4,6 +4,7 @@
 #include <iostream>
 #include <time.h>
 #include <vector>
+#pragma warning(disable:4996)
 //#include "Matrix.cpp"
 
 // Matrix structure. Matrices are stored in row-major order.
@@ -49,6 +50,37 @@ int main()
 			W2.elements[i * W2.width + j] = ((double)rand() / (RAND_MAX + 1.0));
 
 
+	float sepal_legnth = 0.0;
+	float sepal_width = 0.0;
+	float petal_legnth = 0.0;
+	float petal_width = 0.0;
+	float type = 0.0;
+
+	FILE* fp = fopen("iris.csv", "r");
+
+	int i = 0;
+	int row = 150;
+	float data[5][150];
+	char line[150];
+	while (fgets(line, 150, fp) && (i < row))
+	{
+		// double row[ssParams->nreal + 1];
+		char* tmp = strdup(line);
+
+		int j = 0;
+		const char* tok;
+		for (tok = strtok(line, ","); tok && *tok; j++, tok = strtok(NULL, "\n"))
+		{
+			data[i][j] = atof(tok);
+			printf("%f", data[i][j]);
+		}
+		printf("\n");
+
+		free(tmp);
+		i++;
+	}
+
+
 	Matrix input;
 	input.height = 2;
 	input.width = 1;
@@ -59,12 +91,12 @@ int main()
 	target.height = 2;
 	target.width = 1;
 	target.elements = (float*)malloc(target.width * target.height * sizeof(float));
-	target.elements[0] = 5;
+	target.elements[0] = 20.2345678;
 	target.elements[1] = 9;
 
 	
 	std::vector<Matrix> weights = train(W1, W2, input, input);
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 5000; i++) {
 		weights = train(weights[0], weights[1], input, target);
 	}
 
@@ -88,7 +120,7 @@ std::vector<Matrix> train(Matrix W1, Matrix W2, Matrix input, Matrix target) {
 
 
 	// Performing matrix subtraction
-	Matrix delta3 = matSub(target, net);
+	Matrix delta3 = matSub(target, o);
 	// Changing all values to negative
 	for (int i = 0; i < delta3.height; i++) {
 		for (int j = 0; j < delta3.width; j++) {
@@ -101,7 +133,7 @@ std::vector<Matrix> train(Matrix W1, Matrix W2, Matrix input, Matrix target) {
 	for (int i = 0; i < W2.height; i++) {
 		for (int j = 1; j < W2.width; j++) {
 			if (j % (W2.width - 1) == 0) {
-				printf("4th element will be removed\n\n");
+				//printf("4th element will be removed\n\n");
 			}
 		}
 	}

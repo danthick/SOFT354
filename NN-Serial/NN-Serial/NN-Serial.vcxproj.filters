@@ -18,8 +18,10 @@
     <ClCompile Include="NN-Serial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Matrix.cpp">
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="iris.csv">
       <Filter>Source Files</Filter>
-    </ClCompile>
+    </None>
   </ItemGroup>
 </Project>
