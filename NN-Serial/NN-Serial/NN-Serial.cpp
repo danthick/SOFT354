@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <time.h>
+#include <vector>
 //#include "Matrix.cpp"
 
 // Matrix structure. Matrices are stored in row-major order.
@@ -16,23 +17,26 @@ typedef struct {
 Matrix matMult(const Matrix A, const Matrix B);
 Matrix feedForward(Matrix W1, Matrix W2, Matrix input);
 Matrix sigmoidFunction(Matrix input);
-Matrix train(Matrix W1, Matrix W2, Matrix input);
+std::vector<Matrix> train(Matrix W1, Matrix W2, Matrix input, Matrix target);
 Matrix matSub(const Matrix A, const Matrix B);
+Matrix matTranspose(const Matrix A);
 
 
 int main()
 {
 	srand(time(NULL));
 	// Defining network variables
-	int noOfInputs = 2; int noOfHiddenNodes = 3; int noOfOutputs = 1;
+	int noOfInputNodes = 2; int noOfHiddenNodes = 3; int noOfOutputs = 1;
 
 	// Defining weight matrices, accounting for bias on dimentions
 	Matrix W1, W2;
 	W1.height = noOfHiddenNodes;
-	W1.width = noOfInputs + 1;
+	W1.width = noOfInputNodes;
+	//W1.width = noOfInputs + 1;
 	W1.elements = (float*)malloc(W1.width * W1.height * sizeof(float));
 	W2.height = noOfOutputs;
-	W2.width = noOfHiddenNodes + 1;
+	W2.width = noOfHiddenNodes;
+	//W2.width = noOfHiddenNodes + 1;
 	W2.elements = (float*)malloc(W2.width * W2.height * sizeof(float));
 
 	// Setting weights to random values between 0 and 1 
@@ -51,37 +55,81 @@ int main()
 	input.elements = (float*)malloc(input.width * input.height * sizeof(float));
 	input.elements[0] = 2.5;
 	input.elements[1] = 4.5;
+	Matrix target;
+	target.height = 2;
+	target.width = 1;
+	target.elements = (float*)malloc(target.width * target.height * sizeof(float));
+	target.elements[0] = 5;
+	target.elements[1] = 9;
 
-	Matrix output = feedForward(W1, W2, input);
+	
+	std::vector<Matrix> weights = train(W1, W2, input, input);
+	for (int i = 0; i < 100; i++) {
+		weights = train(weights[0], weights[1], input, target);
+	}
 
-	for (int i = 0; i < output.height; i++)
-		for (int j = 0; j < output.width; j++)
-			printf("%f", output.elements[0]);
+	Matrix output = feedForward(weights[0], weights[1], input);
 
 }
 
-Matrix train(Matrix W1, Matrix W2, Matrix input, Matrix target) {
+std::vector<Matrix> train(Matrix W1, Matrix W2, Matrix input, Matrix target) {
 	// Add bias to the input matrix
 	input.elements[input.height] = 1;
 	// Calculate output from hidden layer
 	Matrix net = matMult(W1, input);
 	// Sigmoid activation function
-	net = sigmoidFunction(net);
-	// Add bias to activation from hidden layer, add update matrix dimensions
-	net.elements[net.height] = 1;
-	net.height++;
+	Matrix a2 = sigmoidFunction(net);
+	// Add bias to activation from hidden layer, and update matrix dimensions
+	Matrix a2Hat = a2;
+	a2Hat.elements[net.height] = 1;
+	a2Hat.height++;
 	// Calculate output from last layer
-	net = matMult(W2, net);
+	Matrix o = matMult(W2, net);
 
 
+	// Performing matrix subtraction
 	Matrix delta3 = matSub(target, net);
+	// Changing all values to negative
 	for (int i = 0; i < delta3.height; i++) {
-		for (int i = 0; i < delta3.width; i++) {
+		for (int j = 0; j < delta3.width; j++) {
 			delta3.elements[j + i * delta3.width] = -delta3.elements[j + i * delta3.width];
 		}
 	}
+	
+
+	// NEED TO REMOVE BIAS FROM W2
+	for (int i = 0; i < W2.height; i++) {
+		for (int j = 1; j < W2.width; j++) {
+			if (j % (W2.width - 1) == 0) {
+				printf("4th element will be removed\n\n");
+			}
+		}
+	}
+
+	// HAVE NOT INCLUDED ACTIVATION FUNCTION REMOVAL
+	Matrix W2T = matTranspose(W2);
+	Matrix delta2 = matMult(W2T, delta3);
+
+	// Calculating error gradient
+	Matrix inputT = matTranspose(input);
+	Matrix netT = matTranspose(net);
+
+	Matrix errGradientW1 = matMult(delta2, inputT);
+	Matrix errGradientW2 = matMult(delta3, netT);
+
+	// Updating weights using learning rate
+	errGradientW1.elements[0] = errGradientW1.elements[0] * 0.01;
+	errGradientW2.elements[0] = errGradientW2.elements[0] * 0.01;
+
+	W1 = matSub(W1, errGradientW1);
+	W2 = matSub(W2, errGradientW2);
 
 
+	std::vector<Matrix> weights;
+	weights.push_back(W1);
+	weights.push_back(W2);
+	
+	return weights;
 
 }
 
@@ -142,5 +190,18 @@ Matrix matSub(const Matrix A, const Matrix B) {
 			C.elements[j + i * C.width] = A.elements[j + i * C.width] - B.elements[j + i * C.width];
 		}
 	}
-	
+	return C;
+}
+
+Matrix matTranspose(const Matrix A) {
+	Matrix C;
+	C.height = A.width;
+	C.width = A.height;
+	C.elements = (float*)malloc(C.width * C.height * sizeof(float));
+
+	for (int row = 0; row < A.height; row++)
+		for (int col = 0; col < A.width; col++)
+			C.elements[row + col * A.height] = A.elements[col + row * A.width];
+
+	return C;
 }
