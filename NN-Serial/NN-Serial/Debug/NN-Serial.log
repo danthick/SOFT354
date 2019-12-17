@@ -1,7 +1,10 @@
-﻿  Matrix.cpp
-  NN-Serial.cpp
-C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(37,52): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(61,50): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(65,51): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
-  NN-Serial.vcxproj -> C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\Debug\NN-Serial.exe
+﻿  NN-Serial.cpp
+C:\Users\danth\Desktop\NN-Serial\NN-Serial\Matrix.cpp(30,50): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\danth\Desktop\NN-Serial\NN-Serial\NN-Serial.cpp(97,41): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\danth\Desktop\NN-Serial\NN-Serial\NN-Serial.cpp(102,47): warning C4305: 'argument': truncation from 'double' to 'float'
+C:\Users\danth\Desktop\NN-Serial\NN-Serial\NN-Serial.cpp(125,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\danth\Desktop\NN-Serial\NN-Serial\NN-Serial.cpp(146,25): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\danth\Desktop\NN-Serial\NN-Serial\NN-Serial.cpp(147,25): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\danth\Desktop\NN-Serial\NN-Serial\NN-Serial.cpp(148,25): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\danth\Desktop\NN-Serial\NN-Serial\NN-Serial.cpp(149,25): warning C4305: '=': truncation from 'double' to 'float'
+  NN-Serial.vcxproj -> C:\Users\danth\Desktop\NN-Serial\Debug\NN-Serial.exe

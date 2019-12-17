@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
-    <ProjectGuid>{50C71BED-EE6D-4F85-9896-920EBB26F195}</ProjectGuid>
+    <ProjectGuid>{735DE9C1-BAB0-40EF-A88B-E9430B28D5E1}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>NNSerial</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
@@ -147,10 +147,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="NN-Serial.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="iris.csv" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
