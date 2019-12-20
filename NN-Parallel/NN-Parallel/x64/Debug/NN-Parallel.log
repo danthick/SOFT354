@@ -1,0 +1,35 @@
+﻿  Compiling CUDA source file kernel.cu...
+  Compiling CUDA source file Matrix.cu...
+  
+  C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Parallel\NN-Parallel>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\bin\nvcc.exe" -gencode=arch=compute_35,code=\"sm_35,compute_35\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\bin\HostX86\x64" -x cu  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\kernel.cu.obj "C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Parallel\NN-Parallel\kernel.cu" 
+  
+  C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Parallel\NN-Parallel>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\bin\nvcc.exe" -gencode=arch=compute_35,code=\"sm_35,compute_35\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.24.28314\bin\HostX86\x64" -x cu  -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.1\include"  -G   --keep-dir x64\Debug -maxrregcount=0  --machine 64 --compile -cudart static  -g   -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\Matrix.cu.obj "C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Parallel\NN-Parallel\Matrix.cu" 
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/Matrix.cu(26): warning : function "matRand" was declared but never referenced
+  
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/Matrix.cu(34): warning : function "matMult" was declared but never referenced
+  
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/Matrix.cu(48): warning : function "matSub" was declared but never referenced
+  
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/Matrix.cu(58): warning : function "matTranspose" was declared but never referenced
+  
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/Matrix.cu(67): warning : function "matAdd" was declared but never referenced
+  
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/Matrix.cu(75): warning : function "matScale" was declared but never referenced
+  
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/Matrix.cu(83): warning : function "matElementMult" was declared but never referenced
+  
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/Matrix.cu(92): warning : function "activation" was declared but never referenced
+  
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/Matrix.cu(100): warning : function "derivative" was declared but never referenced
+  
+  Matrix.cu
+  kernel.cu
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/Matrix.cu(30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Parallel\NN-Parallel\Matrix.cu(30): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/kernel.cu(98): warning C4305: 'argument': truncation from 'double' to 'float'
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/kernel.cu(103): warning C4305: 'argument': truncation from 'double' to 'float'
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/kernel.cu(126): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/kernel.cu(148): warning C4305: '=': truncation from 'double' to 'float'
+C:/Users/danth/Google Drive/University/Year 3/SOFT354/Coursework/NN-Parallel/NN-Parallel/kernel.cu(149): warning C4305: '=': truncation from 'double' to 'float'
+     Creating library C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Parallel\x64\Debug\NN-Parallel.lib and object C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Parallel\x64\Debug\NN-Parallel.exp
+  NN-Parallel.vcxproj -> C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Parallel\x64\Debug\NN-Parallel.exe

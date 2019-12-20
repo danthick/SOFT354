@@ -82,11 +82,12 @@ Network train(Network network, Matrix input, Matrix target) {
 	Matrix outputs = matMult(network.W2, hiddenOutputs);
 	outputs = activation(outputs);
 
+
+	// START BACKPROP
+
 	// Calculate output error
 	Matrix outputError = matSub(target, outputs);
 
-
-	// START BACKPROP
 	// Calculate hidden error
 	Matrix W2T = matTranspose(network.W2);
 	Matrix hiddenError = matScale(W2T, outputError.elements[0]);
@@ -143,10 +144,10 @@ int main()
 		}
 	}
 
-	input.elements[0] = 6.1;
-	input.elements[1] = 2.6;
-	input.elements[2] = 5.6;
-	input.elements[3] = 1.4;
+	input.elements[0] = 6.5;
+	input.elements[1] = 2.8;
+	input.elements[2] = 4.6;
+	input.elements[3] = 1.5;
 
 	Matrix output = feedForward(network, input);
 }
