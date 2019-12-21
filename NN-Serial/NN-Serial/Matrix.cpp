@@ -36,7 +36,6 @@ static Matrix matMult(const Matrix A, const Matrix B) {
 	for (int i = 0; i < A.height; i++) {
 		for (int j = 0; j < B.width; j++) {
 			C.elements[j + i * B.width] = 0;
-
 			for (int k = 0; k < A.width; k++) {
 				C.elements[j + i * B.width] += A.elements[k + i * A.width] * B.elements[j + k * B.width];
 			}

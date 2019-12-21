@@ -118,9 +118,6 @@ Network train(Network network, Matrix input, Matrix target) {
 	return network;
 }
 
-
-
-
 int main()
 {
 	srand(time(NULL));
@@ -134,7 +131,7 @@ int main()
 	Matrix input(4, 1);
 	Matrix target(1, 1);
 
-	for (int iterations = 0; iterations < 5000; iterations++) {
+	for (int iterations = 0; iterations < 1000; iterations++) {
 		for (int i = 0; i < data.height; i++) {
 			for (int j = 0; j < data.width - 1; j++) {
 				input.elements[j] = data.elements[i * data.width + j];
