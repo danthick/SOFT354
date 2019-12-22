@@ -124,27 +124,31 @@ int main()
 	// Read in data from CSV file
 	Matrix data = readInData(150, 5);
 	// Define network parameters
-	Network network(4,5,1);
+	Network network(4,10000000,1);
 	// Generate intial weights for network
 	network = generateWeights(network);
 
 	Matrix input(4, 1);
 	Matrix target(1, 1);
 
-	for (int iterations = 0; iterations < 1000; iterations++) {
+	for (int iterations = 0; iterations < 1; iterations++) {
 		for (int i = 0; i < data.height; i++) {
 			for (int j = 0; j < data.width - 1; j++) {
 				input.elements[j] = data.elements[i * data.width + j];
 			}
 			target.elements[0] = data.elements[i * data.width + 4];
+			clock_t tStart = clock();
 			network = train(network, input, target);
+			clock_t tEnd = clock();
+			float ms = 1000.0f * (tEnd - tStart) / CLOCKS_PER_SEC;
+			printf("1 iteration took %fms.\n", ms);
 		}
 	}
 
-	input.elements[0] = 6.5;
-	input.elements[1] = 2.8;
+	input.elements[0] = 6.1;
+	input.elements[1] = 3;
 	input.elements[2] = 4.6;
-	input.elements[3] = 1.5;
+	input.elements[3] = 1.4;
 
 	Matrix output = feedForward(network, input);
 }

@@ -3,6 +3,7 @@ C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Se
 C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(98,41): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(103,47): warning C4305: 'argument': truncation from 'double' to 'float'
 C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(123,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(145,25): warning C4305: '=': truncation from 'double' to 'float'
-C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(146,25): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(148,25): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(150,25): warning C4305: '=': truncation from 'double' to 'float'
+C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\NN-Serial\NN-Serial.cpp(151,25): warning C4305: '=': truncation from 'double' to 'float'
   NN-Serial.vcxproj -> C:\Users\danth\Google Drive\University\Year 3\SOFT354\Coursework\NN-Serial\Debug\NN-Serial.exe
