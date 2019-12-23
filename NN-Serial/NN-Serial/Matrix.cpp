@@ -7,6 +7,10 @@
 #include <cstddef>
 #include <stddef.h>
 
+/*
+Small matrix library to perform various required matrix calculations.
+*/
+
 struct Matrix {
 	int height;
 	int width;
