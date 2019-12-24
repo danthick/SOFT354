@@ -12,9 +12,23 @@
 #include "device_launch_parameters.h"
 #pragma warning(disable:4996)
 
-
 // Thread block size 
-#define BLOCK_SIZE 64
+#define BLOCK_SIZE 2
+
+// 
+struct Network {
+	Matrix W1;
+	Matrix W2;
+	int noOfInputs;
+	int noOfHidden;
+	int noOfOutputs;
+
+	Network(int inputs, int hidden, int outputs) {
+		this->noOfInputs = inputs;
+		this->noOfHidden = hidden;
+		this->noOfOutputs = outputs;
+	}
+};
 
 __global__ void MatMulKernelSolution(Matrix A, Matrix B, Matrix C);
 
@@ -153,20 +167,6 @@ void matMultiplication(const Matrix A, const Matrix B, const Matrix C) {
 	cudaFree(d_C.elements);
 }
 
-struct Network {
-	Matrix W1;
-	Matrix W2;
-	int noOfInputs;
-	int noOfHidden;
-	int noOfOutputs;
-
-	Network(int inputs, int hidden, int outputs) {
-		this->noOfInputs = inputs;
-		this->noOfHidden = hidden;
-		this->noOfOutputs = outputs;
-	}
-};
-
 Matrix readInData(int height, int width) {
 	Matrix input;
 	input.height = 150;
@@ -270,6 +270,15 @@ Network train(Network network, Matrix input, Matrix target) {
 	return network;
 }
 
+void testNetwork() {
+	input.elements[0] = 6.5;
+	input.elements[1] = 2.8;
+	input.elements[2] = 4.6;
+	input.elements[3] = 1.5;
+
+	Matrix output = feedForward(network, input);
+}
+
 int main()
 {
 	srand(time(NULL));
@@ -296,12 +305,6 @@ int main()
 			//printf("1 iteration took %fms.\n", ms);
 		}
 	}
-
-	input.elements[0] = 6.5;
-	input.elements[1] = 2.8;
-	input.elements[2] = 4.6;
-	input.elements[3] = 1.5;
-
-	Matrix output = feedForward(network, input);
+	testNetwork();
 	cudaDeviceReset();
 }

@@ -11,6 +11,7 @@
 Small matrix library to perform various required matrix calculations.
 */
 
+// Structure to define the matrix features. Elements stored in row major order.
 struct Matrix {
 	int height;
 	int width;
@@ -19,6 +20,7 @@ struct Matrix {
 
 	Matrix(){}
 
+	// Constructor for a matrix stucture
 	Matrix(int height, int width) {
 		this->height = height;
 		this->width = width;
@@ -26,7 +28,7 @@ struct Matrix {
 	}
 };
 
-
+// Function to fill a matrix with random values between 0 and 1
 static Matrix matRand(Matrix A) {
 	Matrix C(A.height, A.width);
 	for (int i = 0; i < A.height; i++)
@@ -35,6 +37,7 @@ static Matrix matRand(Matrix A) {
 	return C;
 }
 
+// Function to multiply two matrices together
 static Matrix matMult(const Matrix A, const Matrix B) {
 	Matrix C(A.height, B.width);
 	for (int i = 0; i < A.height; i++) {
@@ -48,6 +51,7 @@ static Matrix matMult(const Matrix A, const Matrix B) {
 	return C;
 }
 
+// Function to subtract one matrix from another element wise
 static Matrix matSub(const Matrix A, const Matrix B) {
 	Matrix C(A.height, A.width);
 	for (int i = 0; i < C.height; i++) {
@@ -58,6 +62,7 @@ static Matrix matSub(const Matrix A, const Matrix B) {
 	return C;
 }
 
+// Function to transpose a matrix
 static Matrix matTranspose(const Matrix A) {
 	Matrix C(A.width, A.height);
 	for (int row = 0; row < A.height; row++)
@@ -67,6 +72,7 @@ static Matrix matTranspose(const Matrix A) {
 	return C;
 }
 
+// Function to add two matrices together alement wise
 static Matrix matAdd(const Matrix A, const Matrix B) {
 	Matrix C(A.height, A.width);
 	for (int i = 0; i < A.height; i++)
@@ -75,6 +81,7 @@ static Matrix matAdd(const Matrix A, const Matrix B) {
 	return C;
 }
 
+// Function to multiply each matrix element by a given value
 static Matrix matScale(const Matrix A, float B) {
 	Matrix C(A.height, A.width);
 	for (int i = 0; i < A.height; i++)
@@ -83,6 +90,7 @@ static Matrix matScale(const Matrix A, float B) {
 	return C;
 }
 
+// Function to multiply two matrices together element wise
 static Matrix matElementMult(const Matrix A, const Matrix B) {
 	Matrix C(A.height, A.width);
 	for (int i = 0; i < A.height; i++)
@@ -91,7 +99,7 @@ static Matrix matElementMult(const Matrix A, const Matrix B) {
 	return C;
 }
 
-
+// Function to run sigmoid activation to each element in the matrix
 static Matrix activation(const Matrix A) {
 	Matrix C(A.height, A.width);
 	for (int i = 0; i < A.height; i++)
@@ -100,6 +108,7 @@ static Matrix activation(const Matrix A) {
 	return C;
 }
 
+// Function to calculate the sigmoid derivative for each element in the matrix
 static Matrix derivative(const Matrix A) {
 	Matrix C(A.height, A.width);
 	for (int i = 0; i < A.height; i++)
