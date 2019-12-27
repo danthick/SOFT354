@@ -9,13 +9,14 @@
 #include "Matrix.cpp"
 #pragma warning(disable:4996)
 
+// Structure to define neural network
 struct Network {
-	Matrix W1;
-	Matrix W2;
-	int noOfInputs;
-	int noOfHidden;
-	int noOfOutputs;
-
+	Matrix W1; // First layer weights
+	Matrix W2; // Second layer weights
+	int noOfInputs; // Number of input nodes
+	int noOfHidden; // Number of hidden nodes
+	int noOfOutputs; // Number of output nodes
+	// Constructor for neural network
 	Network(int inputs, int hidden, int outputs) {
 		this->noOfInputs = inputs;
 		this->noOfHidden = hidden;
@@ -23,15 +24,13 @@ struct Network {
 	}
 };
 
+// Function to read in data from a CSV file
 Matrix readInData(int height, int width) {
-	Matrix input;
-	input.height = 150;
-	input.width = 5;
-	input.elements = (float*)malloc(input.width * input.height * sizeof(float));
-
+	// Create matrix to store data
+	Matrix input(150, 5);
+	// Loop through each line in file and store data is matrix
 	FILE* fp;
 	size_t count = 0;
-
 	fp = fopen("iris.csv", "r");
 	if (fp == NULL) {
 		fprintf(stderr, "Error reading file\n");
@@ -41,10 +40,11 @@ Matrix readInData(int height, int width) {
 		count++;
 	}
 	fclose(fp);
-
+	// Return data from file
 	return input;
 }
 
+// Function to randomly generate weights
 Network generateWeights(Network network) {
 	// Setting up weight matracies
 	network.W1.height = network.noOfHidden;
@@ -53,14 +53,14 @@ Network generateWeights(Network network) {
 	network.W2.height = network.noOfOutputs;
 	network.W2.width = network.noOfHidden;
 	network.W2.elements = (float*)malloc(network.W2.width * network.W2.height * sizeof(float));
-
 	// Setting weights to random values between 0 and 1 
 	network.W1 = matRand(network.W1);
 	network.W2 = matRand(network.W2);
-
+	// Return whole network
 	return network;
 }
 
+// Function to complete a feedforward pass
 Matrix feedForward(Network network, Matrix input) {
 	// Generating hidden ouputs
 	Matrix net = matMult(network.W1, input);
@@ -73,6 +73,7 @@ Matrix feedForward(Network network, Matrix input) {
 	return outputs;
 }
 
+// Function to complete backpropagation algorithm and update weights
 Network train(Network network, Matrix input, Matrix target) {
 	// FEEDFORWARD
 	// Generating hidden ouputs
@@ -82,9 +83,7 @@ Network train(Network network, Matrix input, Matrix target) {
 	Matrix outputs = matMult(network.W2, hiddenOutputs);
 	outputs = activation(outputs);
 
-
-	// START BACKPROP
-
+	// START BACKPROPAGATION
 	// Calculate output error
 	Matrix outputError = matSub(target, outputs);
 
@@ -102,20 +101,46 @@ Network train(Network network, Matrix input, Matrix target) {
 	gradientHidden = matElementMult(gradientHidden, hiddenError);
 	gradientHidden = matScale(gradientHidden, 0.1);
 
+	// Calculate delta values for output layer and update weights
 	Matrix hiddenOutputsT = matTranspose(hiddenOutputs);
 	Matrix deltaOutput = matMult(gradientOut, hiddenOutputsT);
 	network.W2 = matAdd(network.W2, deltaOutput);
 
+	// Calculate delta values for hidden layer and update weights
 	Matrix inputsT = matTranspose(input);
 	Matrix deltaHidden = matMult(gradientHidden, inputsT);
 	network.W1 = matAdd(network.W1, deltaHidden);
 
+	// Clean up
 	free(net.elements); free(hiddenOutputs.elements); free(outputs.elements);
 	free(outputError.elements); free(W2T.elements); free(hiddenError.elements);
 	free(gradientOut.elements); free(gradientHidden.elements); free(hiddenOutputsT.elements);
 	free(deltaOutput.elements); free(inputsT.elements); free(deltaHidden.elements);
-
+	// Return network with updated weights
 	return network;
+}
+
+// Function to test the network and ouput the results
+void testNetwork(Network network, Matrix data) {
+	// Create input matrix
+	Matrix input(4, 1);
+	float error;
+
+	// Loop through first 5 sets of data and run through a feedfoward pass to get the output
+	for (int i = 0; i < 5; i++) {
+		for (int j = 0; j < data.width - 1; j++) {
+			input.elements[j] = data.elements[i * data.width + j]; // Store values in input matrix
+			printf("Feature %d = %f | ", j + 1, input.elements[j]); // Print the features of the plant
+		}
+		Matrix output = feedForward(network, input); // Run through feedforward pass
+		// Calculate error
+		if (data.elements[i * data.width + 4] == 0)
+			error = output.elements[0];
+		else
+			error = ((output.elements[0] - data.elements[i * data.width + 4]) / data.elements[i * data.width + 4]);
+		// Print target, actual output and the error from the feed forward pass
+		printf("Target = %f | Output  = %f | Error = %f\n", data.elements[i * data.width + 4], output.elements[0], error);
+	}
 }
 
 int main()
@@ -124,31 +149,23 @@ int main()
 	// Read in data from CSV file
 	Matrix data = readInData(150, 5);
 	// Define network parameters
-	Network network(4,10000000,1);
+	Network network(4,5,1);
 	// Generate intial weights for network
 	network = generateWeights(network);
-
+	// Create input and target matrices
 	Matrix input(4, 1);
 	Matrix target(1, 1);
 
-	for (int iterations = 0; iterations < 1; iterations++) {
+	// Loop through each set of data and perform the backpropagation algorithm for a number of iterations
+	for (int iterations = 0; iterations < 100; iterations++) {
 		for (int i = 0; i < data.height; i++) {
 			for (int j = 0; j < data.width - 1; j++) {
-				input.elements[j] = data.elements[i * data.width + j];
+				input.elements[j] = data.elements[i * data.width + j]; // Store plant features in input matrix
 			}
-			target.elements[0] = data.elements[i * data.width + 4];
-			clock_t tStart = clock();
-			network = train(network, input, target);
-			clock_t tEnd = clock();
-			float ms = 1000.0f * (tEnd - tStart) / CLOCKS_PER_SEC;
-			printf("1 iteration took %fms.\n", ms);
+			target.elements[0] = data.elements[i * data.width + 4]; // Store target value in target matrix
+			network = train(network, input, target); // Perform backpropagation and update weights
 		}
 	}
-
-	input.elements[0] = 6.1;
-	input.elements[1] = 3;
-	input.elements[2] = 4.6;
-	input.elements[3] = 1.4;
-
-	Matrix output = feedForward(network, input);
+	// Call function to test the trained network
+	testNetwork(network, data);
 }
