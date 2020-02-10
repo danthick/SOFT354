@@ -13,7 +13,11 @@ If you would like to know more about the network used in this project or any oth
 The project contains both a serial and parallel project folders. You are able to modify the number of hidden nodes as well as the number of iterations the network trains for within the source code to be able to compare the run-times of each one.
 
 ## Results
-Hidden Nodes | Serial Time (ms) | Parallel Time (ms) | Speed Up |
+| No. of Hidden Nodes | Serial Time (ms) | Parallel Time (ms) | Speed Up |
 | --- | --- |--- | --- |
 | 500,000 | 153 | 121 | 1.26 |
 | 1,000,000 | 296 | 173 | 1.71 |
+| 2,500,000 | 847 | 337 | 2.51 |
+| 5,000,000 | 1207 | 542 | 2.23 |
+| 7,500,000 | 2765 | 794 | 3.48 |
+| 10,000,000 | 2928 | 998 | 2.93 |
