@@ -5,7 +5,7 @@ This project is designed to compare the difference between serial and parallel r
 ## Neural Network
 When the program is run it will train using a data set of 150 different [iris flowers](https://github.com/danthick/SOFT354/blob/master/iris-original.csv). The training time is what we are aiming to speed up as the back-propagation algorithm contains various matrix multiplication calculations. Below is a diagram of the network implemented:
 
-![Neural Network Diagram](Exported Files/Neural Network.png)
+![Neural Network Diagram](https://github.com/danthick/SOFT354/blob/master/Exported%20Files/Neural%20Network.png)
 
 If you would like to know more about the network used in this project or any other algorithms then please read the report that is included in the repository.
 
